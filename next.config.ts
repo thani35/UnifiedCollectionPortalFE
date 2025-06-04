@@ -11,7 +11,7 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value: "default-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'none';",
+    value: "script-src 'self' 'unsafe-inline';",
   },
   {
     key: "X-Content-Type-Options",
