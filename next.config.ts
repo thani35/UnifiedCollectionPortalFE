@@ -13,13 +13,16 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: `
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' data:;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline';
       style-src 'self' 'unsafe-inline';
-      img-src 'self' data: blob:;
-      font-src 'self' data:;
-      connect-src *;
+      img-src 'self' blob: data:;
+      font-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
       frame-ancestors 'none';
-    `.replace(/\s{2,}/g, " ").trim(),
+      upgrade-insecure-requests;
+    `.replace(/\n/g, ''),
   },
   {
     key: "X-Content-Type-Options",
