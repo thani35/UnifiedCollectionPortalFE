@@ -12,17 +12,16 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value: `
-      default-src 'self';
-      script-src 'self' 'unsafe-eval' 'unsafe-inline';
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' blob: data:;
-      font-src 'self';
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self';
-      frame-ancestors 'none';
-      upgrade-insecure-requests;
-    `.replace(/\n/g, ''),
+      default -src * data: blob: 'unsafe-inline' 'unsafe-eval';
+      script - src * data: blob: 'unsafe-inline' 'unsafe-eval';
+      style - src * data: blob: 'unsafe-inline';
+      img - src * data: blob: ;
+      connect - src *;
+      frame - src *;
+      font - src * data: ;
+      frame - ancestors *;
+      form - action *;
+      `.replace(/\s{2,}/g, ' ').trim(),
   },
   {
     key: "X-Content-Type-Options",
