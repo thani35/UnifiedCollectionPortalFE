@@ -9,10 +9,10 @@ const securityHeaders = [
     key: "X-Frame-Options",
     value: "DENY",
   },
-  {
-    key: "Content-Security-Policy",
-    value: "script-src 'self' 'unsafe-inline';",
-  },
+  // {
+  //   key: "Content-Security-Policy",
+  //   value: "script-src 'self' 'unsafe-inline';",
+  // },
   {
     key: "X-Content-Type-Options",
     value: "nosniff",
