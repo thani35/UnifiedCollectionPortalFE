@@ -138,8 +138,9 @@ const SummaryReport = () => {
 
     const columns = useMemo(() => {
         if (isSummaryReport) {
+            const divisionLabel = dataList?.[0]?.office_level_name || 'Division';
             return [
-                { label: 'Division', key: 'office_name', sortable: true },
+                { label: divisionLabel, key: 'office_name', sortable: true },
                 { label: 'Total User', key: 'total_user', align: 'center', sortable: true },
                 { label: 'Active IDs', key: 'active_ids', align: 'center', sortable: true },
                 { label: '<10AM', key: 'before_10am_combined', align: 'center' },
@@ -171,7 +172,7 @@ const SummaryReport = () => {
             { label: 'Total Denial', key: 'total_denial', align: 'center', sortable: true },
             { label: 'Total Collection', key: 'total_collection', align: 'center', sortable: true }
         ];
-    }, [isSummaryReport]);
+    }, [isSummaryReport, dataList]);
 
     // Prepare data for table to support cell formatting
     const processedDataList = useMemo(() => {
@@ -194,6 +195,7 @@ const SummaryReport = () => {
             const combine = (collectionField, denialField) => `${sum(collectionField)} / ${sum(denialField)}`;
 
             rows.push({
+                office_level_name: dataList?.[0]?.office_level_name ?? 'Total',
                 office_name: 'Total',
                 total_user: sum('total_user'),
                 active_ids: sum('active_ids'),
