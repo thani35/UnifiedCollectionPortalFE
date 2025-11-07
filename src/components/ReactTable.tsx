@@ -361,7 +361,9 @@ const ReactTable = <T extends Record<string, any>>({
                                         />
                                     </td>}
                                     {!avoidSrNo &&
-                                        <td>{index + 1}</td>}
+                                        <td>
+                                            {item?.is_total_row ? '' : index + 1}
+                                        </td>}
                                     {columns.map(column => (
                                         <td key={column.key as string}
                                             className={`p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] whitespace-nowrap ${column.align === 'right' ? 'text-right' : column.align === 'center' ? 'text-center' : 'text-left'}`}

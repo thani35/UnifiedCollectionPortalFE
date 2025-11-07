@@ -774,30 +774,37 @@ export const downloadAgencyPaymentModewiseSummaryReport = async (data: any, type
   }
 };
 
-export const getSummaryReport = async (data: any) => {
+export const getSummaryReport = async (reportType: string, data: any) => {
   try {
-    const response = await api.post(
-      "/v1/energy-reports/summary-report-collector-wise/fetch",
-      data
-    );
+    const endpoint =
+      reportType === "summary"
+        ? "/v1/energy-reports/summary-report/fetch"
+        : "/v1/energy-reports/summary-report-collector-wise/fetch";
+
+    const response = await api.post(endpoint, data);
     return response.data;
   } catch (error) {
     throw error?.response?.data;
   }
 };
 
-export const downloadSummaryReport = async (data: any, type: string) => {
+export const downloadSummaryReport = async (
+  reportType: string,
+  data: any,
+  type: string
+) => {
   try {
-    const response = await api.post(
-      `/v1/energy-reports/summary-report-collector-wise/download/${type}`,
-      data,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        responseType: "blob",
-      }
-    );
+    const endpoint =
+      reportType === "summary"
+        ? `/v1/energy-reports/summary-report/download/${type}`
+        : `/v1/energy-reports/summary-report-collector-wise/download/${type}`;
+
+    const response = await api.post(endpoint, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      responseType: "blob",
+    });
     return response;
   } catch (error) {
     throw error?.response?.data;
