@@ -248,7 +248,7 @@ const SummaryReport = () => {
                     : data.applicableLevel === levelNameMappedWithId.SUB_DIVISION
                         ? data?.subDivision?.map(Number)?.[0]
                         : data.applicableLevel === levelNameMappedWithId.SECTION
-                            ? data?.section?.map(Number)?.[0]
+                            ? reportType === 'summary' ? data?.subDivision?.map(Number)?.[0] : data?.section?.map(Number)?.[0]
                             : null;
 
             if (officeStructureId != null) {
@@ -539,7 +539,7 @@ const SummaryReport = () => {
                         errors={errors?.pageSize} 
                     />
 
-                    <div className='self-end mb-1'>
+                    <div className='self-end mt-6'>
                         <Button variant='default' type='submit'>Search</Button>
                     </div>
                 </div>
@@ -547,9 +547,9 @@ const SummaryReport = () => {
 
             <div className="overflow-x-auto mb-4 mt-4">
                 {showTable && <ReactTable
-                    data={processedDataList} // <--- use processed data
+                    data={processedDataList}
                     columns={columns}
-                    groupedHeaders={groupedHeaders} // <-- add this line
+                    groupedHeaders={groupedHeaders}
                     hideSearchAndOtherButtons
                     dynamicPagination
                     itemsPerPage={tableDataPerPage+1}
