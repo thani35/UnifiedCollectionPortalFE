@@ -114,11 +114,17 @@ const SummaryReport = () => {
         try {
             setIsLoading(true);
             const response = await getSummaryReport(reportType, payload);
-            const rows = Array.isArray(response?.data?.data)
+            let data = Array.isArray(response?.data?.data)
                 ? response.data.data
                 : Array.isArray(response?.data)
                     ? response.data
                     : [];
+                    console.log(sections);
+                    console.log(formData?.section?.join(', '));
+                    console.log(data)
+                    console.log(sections?.filter(section => section?.value == formData?.section?.join(', ')));
+            const rows = reportType === 'summary' && formData.applicableLevel == levelNameMappedWithId.SECTION ? 
+            data.filter(item => item?.office_name === sections?.filter(section => section?.value == formData?.section?.join(', '))?.[0]?.label) : data;
             const totalPagesFromResponse = response?.data?.totalPages
                 ?? response?.data?.total_pages
                 ?? 1;
@@ -539,7 +545,7 @@ const SummaryReport = () => {
                         errors={errors?.pageSize} 
                     />
 
-                    <div className='self-end mt-6'>
+                    <div className='mt-6'>
                         <Button variant='default' type='submit'>Search</Button>
                     </div>
                 </div>
